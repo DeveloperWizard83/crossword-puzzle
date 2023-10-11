@@ -5,6 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    font-family: 'Dosis'; 
 }
 
 /* Create a canvas for all elements */
@@ -31,6 +32,7 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center; /* Center-align the text */
+    cursor: pointer;
 }
 
 .special-1{
@@ -91,7 +93,7 @@ body {
 
     background-image: url('kuudes-kysymys.png');
     background-repeat: no-repeat;
-    background-size: 80%;
+    background-size: 70%;
     background-position: center center;
    
    border-bottom: none;
@@ -130,6 +132,77 @@ body {
     pointer-events: none;
 }
 
+.special-10{
+
+    background-image: url('10-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    border-right: none;
+    
+    pointer-events: none;
+   
+}
+
+.special-11{
+
+    background-image: url('11-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    border-right: none;
+    border-left: none;
+    pointer-events: none;
+   
+}
+
+.special-12{
+
+    background-image: url('12-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    border-right: none;
+    border-left: none;
+    pointer-events: none;
+   
+}
+
+.special-13{
+
+    background-image: url('13-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+    
+    border-left: none;
+    pointer-events: none;
+   
+}
+
+.special-14{
+
+    background-image: url('14-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+    
+   
+    pointer-events: none;
+   
+}
+
+.special-15{
+
+    background-image: url('15-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+    
+    
+    pointer-events: none;
+   
+}
 
 
 /* Styles for the left image */
