@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>CSS Grid Ristikko</title>
+    <title>Ristikko</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@600;700&display=swap" rel="stylesheet">
@@ -160,6 +160,13 @@
     // Track the currently selected grid item
     let selectedGridItem = null;
 
+    // Function to update the grid item's content
+    function updateGridItemContent(gridItem, content) {
+        if (!gridItem.classList.contains('special')) {
+            gridItem.textContent = content;
+        }
+    }
+
     // Add click event listeners to each grid item
     gridItems.forEach(function(gridItem) {
         gridItem.addEventListener('click', function() {
@@ -178,12 +185,31 @@
 
     // Listen for keyboard input
     document.addEventListener('keydown', function(event) {
-        if (selectedGridItem && /^[A-Öa-ö]$/.test(event.key)) {
-            selectedGridItem.textContent = event.key.toUpperCase();
-        }else if (event.key === 'Delete' || event.key === 'Backspace') {
-                selectedGridItem.textContent = '';
+        if (selectedGridItem) {
+            if (/^[A-Öa-ö]$/.test(event.key)) {
+                updateGridItemContent(selectedGridItem, event.key.toUpperCase());
+            } else if (event.key === 'Delete' || event.key === 'Backspace') {
+                updateGridItemContent(selectedGridItem, '');
             }
+        }
     });
+
+    // Saving the game state in localStorage
+    const gameState = {
+        gridState: {}
+    };
+
+    gridItems.forEach(gridItem => {
+        const cellId = gridItem.id;
+        const letter = gridItem.textContent; // Get the letter in the grid item
+
+        // Store the letter in the game state with its cell ID
+        gameState.gridState[cellId] = letter;
+    });
+
+    // You can now save the gameState object in localStorage
+    localStorage.setItem('gameState', JSON.stringify(gameState));
 </script>
+
 </body>
 </html>
