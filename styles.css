@@ -4,7 +4,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 80%;
     font-family: 'Dosis'; 
 }
 
@@ -235,8 +235,8 @@ body {
 .banner-container {
     position: absolute;
     margin-top: 10px;
-    left: 50px;
-    width: 540px;
+    left: 40px;
+    width: 550px;
     height: 100px;
      /* Increase the z-index for the banner */
     margin-left: -190px;
@@ -244,7 +244,7 @@ body {
 
 /* Styles for the banner image */
 .banner-image {
-    width: 900px;
+    width: 912px;
     height: 200px;
     
 }
