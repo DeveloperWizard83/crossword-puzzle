@@ -26,11 +26,111 @@ body {
     height: 100%;
     background-color: white;
     border: 3px solid #000;
+    font-size: 32px; /* Adjust the font size as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Center-align the text */
 }
 
-.special {
-    background-color: red;
+.special-1{
+    background-image: url('eka-kysymys.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    border-bottom: white;
+    pointer-events: none;
+  
 }
+
+.special-2{
+
+    background-image: url('toka-kysymys.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    border-top: none;
+    pointer-events: none;
+}
+
+.special-3{
+
+    background-image: url('kolmas-kysymys.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    border-right: none;
+    pointer-events: none;
+   
+}
+
+.special-4{
+
+    background-image: url('neljäs-kysymys.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    border-left: none;
+    border-right: none;
+    pointer-events: none;
+}
+
+.special-5{
+
+    background-image: url('viides-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100%;
+    border-right: none;
+    border-left: none;
+    pointer-events: none;
+   
+}
+
+.special-6{
+
+    background-image: url('kuudes-kysymys.png');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center center;
+   
+   border-bottom: none;
+    border-left: none;
+    border-top: none;
+    pointer-events: none;
+   
+}
+
+.special-7{
+
+    background-image: url('7-kysymys.png');
+    background-repeat: no-repeat;
+    background-size: 80%;
+    background-position: center center;
+   
+   
+    border-bottom: none;
+    pointer-events: none;
+   
+}
+
+.special-8{
+    background-image: url('8-9-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 50%;
+    border-top: none;
+    border-bottom: none;
+    pointer-events: none;
+    
+}
+
+.special-9{
+    border-top:none;
+    pointer-events: none;
+}
+
+
 
 /* Styles for the left image */
 .png-image {
@@ -74,4 +174,8 @@ body {
     width: 900px;
     height: 200px;
     
+}
+
+.blue {
+    background-color: lightblue;
 }

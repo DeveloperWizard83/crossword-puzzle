@@ -36,7 +36,17 @@
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
-        <div class="grid-item special"></div>
+        <div class="grid-item special-1"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item special-2"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
@@ -56,6 +66,17 @@
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
+        <div class="grid-item special-7"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        <div class="grid-item special-3"></div>
+        <div class="grid-item special-4"></div>
+        <div class="grid-item special-5"></div>
+        <div class="grid-item special-6"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
@@ -65,6 +86,7 @@
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
+        <div class="grid-item special-8"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
@@ -74,29 +96,7 @@
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
+        <div class="grid-item special-9"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
         <div class="grid-item"></div>
@@ -149,5 +149,39 @@
         <!-- Jatka näin 12 korkeussuunnassa ja 10 leveyssuunnassa -->
     </div>
 </div>
+
+<script>
+    // Select all grid items
+    const gridItems = document.querySelectorAll('.grid-item');
+
+    // Track the currently selected grid item
+    let selectedGridItem = null;
+
+    // Add click event listeners to each grid item
+    gridItems.forEach(function(gridItem) {
+        gridItem.addEventListener('click', function() {
+            // Remove the blue class from the previously selected grid item
+            if (selectedGridItem) {
+                selectedGridItem.classList.remove('blue');
+            }
+
+            // Set the currently selected grid item
+            selectedGridItem = gridItem;
+
+            // Add the blue class to the clicked grid item
+            selectedGridItem.classList.add('blue');
+        });
+    });
+
+    // Listen for keyboard input
+    document.addEventListener('keydown', function(event) {
+        if (selectedGridItem && /^[A-Öa-ö]$/.test(event.key)) {
+            selectedGridItem.textContent = event.key.toUpperCase();
+        }else if (event.key === 'Delete' || event.key === 'Backspace') {
+                selectedGridItem.textContent = '';
+            }
+    });
+</script>
+
 </body>
 </html>
