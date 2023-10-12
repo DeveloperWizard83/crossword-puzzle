@@ -221,7 +221,7 @@ body {
 .top-image-container {
     position: absolute;
     top: 0;
-    right: -7px;
+   
     margin-top: 210px;
 }
 
@@ -251,4 +251,10 @@ body {
 
 .blue {
     background-color: lightblue;
+}
+
+p{
+
+    margin-left: 300px;
+    font-size: 22px;
 }
