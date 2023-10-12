@@ -20,6 +20,15 @@ body {
     grid-template-rows: repeat(12, 2cm);
     position: relative;
     margin-top: 300px; /* Adjust the value as needed */
+
+    
+}
+@media screen and (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(5, 4cm); /* Change the number of columns and their size */
+        grid-template-rows: repeat(8, 4cm); /* Change the number of rows and their size */
+        /* Other styles for smaller screens... */
+    }
 }
 
 .grid-item {
