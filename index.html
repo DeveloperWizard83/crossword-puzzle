@@ -196,21 +196,43 @@
         }
     });
 
-    // Saving the game state in localStorage
-    const gameState = {
-        gridState: {}
-    };
+  // Load the game state from localStorage when the page loads
+     
+  function loadGameStateFromLocalStorage() {
+    const savedGameState = localStorage.getItem('gameState');
+    if (savedGameState) {
+        const gameState = JSON.parse(savedGameState);
+        for (const cellId in gameState.gridState) {
+            const gridItem = document.getElementById(cellId);
+            if (gridItem) {
+                updateGridItemContent(gridItem, gameState.gridState[cellId]);
+            }
+        }
+    }
+}
 
+    // Call the function to load the game state after defining grid items' content
+    loadGameStateFromLocalStorage();
+
+    // Saving the game state in localStorage when a change is made
     gridItems.forEach(gridItem => {
-        const cellId = gridItem.id;
-        const letter = gridItem.textContent; // Get the letter in the grid item
+        gridItem.addEventListener('input', function() {
+            const gameState = {
+                gridState: {}
+            };
 
-        // Store the letter in the game state with its cell ID
-        gameState.gridState[cellId] = letter;
+            gridItems.forEach(gridItem => {
+                const cellId = gridItem.id;
+                const letter = gridItem.textContent; // Get the letter in the grid item
+
+                // Store the letter in the game state with its cell ID
+                gameState.gridState[cellId] = letter;
+            });
+
+            // Save the gameState object in localStorage
+            localStorage.setItem('gameState', JSON.stringify(gameState));
+        });
     });
-
-    // You can now save the gameState object in localStorage
-    localStorage.setItem('gameState', JSON.stringify(gameState));
 </script>
 
 </body>
