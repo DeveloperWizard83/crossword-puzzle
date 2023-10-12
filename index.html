@@ -39,7 +39,7 @@
         <div class="grid-item" id="cell-12"></div>
         <div class="grid-item" id="cell-13"></div>
         <div class="grid-item" id="cell-14"></div>
-        <div class="grid-item special-1"></div>
+        <div class="grid-item special-1" data-special="true"></div>
         <div class="grid-item" id="cell-15"></div>
         <div class="grid-item" id="cell-16"></div>
         <div class="grid-item" id="cell-17"></div>
@@ -49,7 +49,7 @@
         <div class="grid-item" id="cell-21"></div>
         <div class="grid-item" id="cell-22"></div>
         <div class="grid-item" id="cell-23"></div>
-        <div class="grid-item special-2"></div>
+        <div class="grid-item special-2" data-special="true"></div>
         <div class="grid-item" id="cell-24"></div>
         <div class="grid-item" id="cell-25"></div>
         <div class="grid-item" id="cell-26"></div>
@@ -69,14 +69,14 @@
         <div class="grid-item" id="cell-40"></div>
         <div class="grid-item" id="cell-41"></div>
         <div class="grid-item" id="cell-42"></div>
-        <div class="grid-item special-7"></div>
+        <div class="grid-item special-7" data-special="true"></div>
         <div class="grid-item" id="cell-43"></div>
         <div class="grid-item" id="cell-44"></div>
         <div class="grid-item" id="cell-45"></div>
         <div class="grid-item" id="cell-46"></div>
         <div class="grid-item" id="cell-47"></div>
         <div class="grid-item" id="cell-48"></div>
-        <div class="grid-item special-3"></div>
+        <div class="grid-item special-3" data-special="true"></div>
         <div class="grid-item special-4"></div>
         <div class="grid-item special-5"></div>
         <div class="grid-item special-6"></div>
@@ -89,7 +89,7 @@
         <div class="grid-item" id="cell-55"></div>
         <div class="grid-item" id="cell-56"></div>
         <div class="grid-item" id="cell-57"></div>
-        <div class="grid-item special-8"></div>
+        <div class="grid-item special-8" data-special="true"></div>
         <div class="grid-item" id="cell-58"></div>
         <div class="grid-item" id="cell-59"></div>
         <div class="grid-item" id="cell-60"></div>
@@ -99,12 +99,12 @@
         <div class="grid-item" id="cell-64"></div>
         <div class="grid-item" id="cell-65"></div>
         <div class="grid-item" id="cell-66"></div>
-        <div class="grid-item special-9"></div>
-        <div class="grid-item" id="cell-67"></div>
-        <div class="grid-item special-10"></div>
-        <div class="grid-item special-11"></div>
-        <div class="grid-item special-12"></div>
-        <div class="grid-item special-13"></div>
+        <div class="grid-item special-9" data-special="true"></div>
+        <div class="grid-item" id="cell-67" data-special="true"></div>
+        <div class="grid-item special-10" data-special="true"></div>
+        <div class="grid-item special-11" data-special="true"></div>
+        <div class="grid-item special-12" data-special="true"></div>
+        <div class="grid-item special-13" data-special="true"></div>
         <div class="grid-item" id="cell-67" ></div>
         <div class="grid-item" id="cell-68" ></div>
         <div class="grid-item" id="cell-69" ></div>
@@ -119,7 +119,7 @@
         <div class="grid-item" id="cell-78" ></div>
         <div class="grid-item" id="cell-79" ></div>
         <div class="grid-item" id="cell-80" ></div>
-        <div class="grid-item special-14"></div>
+        <div class="grid-item special-14" data-special="true"></div>
         <div class="grid-item" id="cell-82" ></div>
         <div class="grid-item" id="cell-83" ></div>
         <div class="grid-item" id="cell-84" ></div>
@@ -139,7 +139,7 @@
         <div class="grid-item" id="cell-98" ></div>
         <div class="grid-item" id="cell-99" ></div>
         <div class="grid-item" id="cell-100" ></div>
-        <div class="grid-item special-15"></div>
+        <div class="grid-item special-15" data-special="true"></div>
         <div class="grid-item" id="cell-102" ></div>
         <div class="grid-item" id="cell-103" ></div>
         <div class="grid-item" id="cell-104" ></div>
@@ -196,43 +196,67 @@
         }
     });
 
-  // Load the game state from localStorage when the page loads
-     
-  function loadGameStateFromLocalStorage() {
-    const savedGameState = localStorage.getItem('gameState');
-    if (savedGameState) {
-        const gameState = JSON.parse(savedGameState);
-        for (const cellId in gameState.gridState) {
+    // Load the game state from localStorage when the page loads
+    const gridState = {};
+
+    // Tallentaa kirjaimen taulukkoon kun soluun kirjoitetaan
+    function saveGridItemContent(gridItem) {
+        if (!gridItem.classList.contains('special')) {
+            gridState[gridItem.id] = gridItem.textContent;
+        }
+    }
+
+    // Palauttaa kirjaimet ruudukkoon
+    function loadGridState() {
+    for (const cellId in gridState) {
+        const gridItem = document.getElementById(cellId);
+        if (gridItem && !gridItem.dataset.special) {
+            gridItem.textContent = gridState[cellId];
+        }
+    }
+}
+
+    // Lisää tapahtumankuuntelijat kaikille ruudukoille
+    gridItems.forEach(gridItem => {
+        gridItem.addEventListener('input', function() {
+            saveGridItemContent(gridItem);
+        });
+    });
+
+    // Kutsutaan funktiota ladata kirjaimet peliä varten
+    loadGridState();
+    // Save grid items to localStorage when an item's content changes
+function saveGridItemContent(gridItem) {
+    if (!gridItem.classList.contains('special')) {
+        gridState[gridItem.id] = gridItem.textContent;
+        localStorage.setItem('gridState', JSON.stringify(gridState));
+    }
+}
+
+// Load the grid state from localStorage on page load
+function loadGridState() {
+    const storedGridState = localStorage.getItem('gridState');
+    if (storedGridState) {
+        const parsedGridState = JSON.parse(storedGridState);
+
+        for (const cellId in parsedGridState) {
             const gridItem = document.getElementById(cellId);
-            if (gridItem) {
-                updateGridItemContent(gridItem, gameState.gridState[cellId]);
+            if (gridItem && !gridItem.dataset.special) {
+                gridItem.textContent = parsedGridState[cellId];
             }
         }
     }
 }
 
-    // Call the function to load the game state after defining grid items' content
-    loadGameStateFromLocalStorage();
+// Call the loadGridState function to load the grid state on page load
+loadGridState();
 
-    // Saving the game state in localStorage when a change is made
-    gridItems.forEach(gridItem => {
-        gridItem.addEventListener('input', function() {
-            const gameState = {
-                gridState: {}
-            };
-
-            gridItems.forEach(gridItem => {
-                const cellId = gridItem.id;
-                const letter = gridItem.textContent; // Get the letter in the grid item
-
-                // Store the letter in the game state with its cell ID
-                gameState.gridState[cellId] = letter;
-            });
-
-            // Save the gameState object in localStorage
-            localStorage.setItem('gameState', JSON.stringify(gameState));
-        });
+// Add event listeners to save grid items when they change
+gridItems.forEach(gridItem => {
+    gridItem.addEventListener('input', function() {
+        saveGridItemContent(gridItem);
     });
+});
 </script>
 
 </body>
