@@ -70,16 +70,16 @@
         <div class="grid-item" id="cell-41"></div>
         <div class="grid-item" id="cell-42"></div>
         <div class="grid-item special-7" data-special="true"></div>
-        <div class="grid-item" id="cell-43"></div>
+        <div class="grid-item special-16" data-special="true"></div>
         <div class="grid-item" id="cell-44"></div>
         <div class="grid-item" id="cell-45"></div>
         <div class="grid-item" id="cell-46"></div>
         <div class="grid-item" id="cell-47"></div>
         <div class="grid-item" id="cell-48"></div>
         <div class="grid-item special-3" data-special="true"></div>
-        <div class="grid-item special-4"></div>
-        <div class="grid-item special-5"></div>
-        <div class="grid-item special-6"></div>
+        <div class="grid-item special-4" data-special="true"></div>
+        <div class="grid-item special-5" data-special="true"></div>
+        <div class="grid-item special-6" data-special="true"></div>
         <div class="grid-item" id="cell-49"></div>
         <div class="grid-item" id="cell-50"></div>
         <div class="grid-item" id="cell-51"></div>
@@ -100,7 +100,7 @@
         <div class="grid-item" id="cell-65"></div>
         <div class="grid-item" id="cell-66"></div>
         <div class="grid-item special-9" data-special="true"></div>
-        <div class="grid-item" id="cell-67" data-special="true"></div>
+        <div class="grid-item" id="cell-67"></div>
         <div class="grid-item special-10" data-special="true"></div>
         <div class="grid-item special-11" data-special="true"></div>
         <div class="grid-item special-12" data-special="true"></div>
@@ -197,66 +197,20 @@
     });
 
     // Load the game state from localStorage when the page loads
-    const gridState = {};
-
-    // Tallentaa kirjaimen taulukkoon kun soluun kirjoitetaan
-    function saveGridItemContent(gridItem) {
-        if (!gridItem.classList.contains('special')) {
-            gridState[gridItem.id] = gridItem.textContent;
-        }
-    }
-
-    // Palauttaa kirjaimet ruudukkoon
-    function loadGridState() {
-    for (const cellId in gridState) {
-        const gridItem = document.getElementById(cellId);
-        if (gridItem && !gridItem.dataset.special) {
-            gridItem.textContent = gridState[cellId];
-        }
-    }
-}
-
-    // Lisää tapahtumankuuntelijat kaikille ruudukoille
-    gridItems.forEach(gridItem => {
-        gridItem.addEventListener('input', function() {
-            saveGridItemContent(gridItem);
-        });
-    });
-
-    // Kutsutaan funktiota ladata kirjaimet peliä varten
-    loadGridState();
-    // Save grid items to localStorage when an item's content changes
-function saveGridItemContent(gridItem) {
-    if (!gridItem.classList.contains('special')) {
-        gridState[gridItem.id] = gridItem.textContent;
-        localStorage.setItem('gridState', JSON.stringify(gridState));
-    }
-}
-
-// Load the grid state from localStorage on page load
-function loadGridState() {
-    const storedGridState = localStorage.getItem('gridState');
-    if (storedGridState) {
-        const parsedGridState = JSON.parse(storedGridState);
-
-        for (const cellId in parsedGridState) {
-            const gridItem = document.getElementById(cellId);
-            if (gridItem && !gridItem.dataset.special) {
-                gridItem.textContent = parsedGridState[cellId];
-            }
-        }
-    }
-}
-
-// Call the loadGridState function to load the grid state on page load
-loadGridState();
-
-// Add event listeners to save grid items when they change
-gridItems.forEach(gridItem => {
-    gridItem.addEventListener('input', function() {
-        saveGridItemContent(gridItem);
-    });
-});
+    const crosswordState = [
+  ['string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string'],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+  [null, null, null, 'string', 'string', null, null, null, null, null],
+];
 </script>
 
 </body>

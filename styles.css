@@ -213,6 +213,18 @@ body {
    
 }
 
+.special-16{
+
+    background-image: url('16-kysymys.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 80%;
+    
+    border-left: none;
+    pointer-events: none;
+   
+}
+
 
 /* Styles for the left image */
 .png-image {
