@@ -156,61 +156,103 @@
 
 
 <script>
-    // Select all grid items
-    const gridItems = document.querySelectorAll('.grid-item');
-
-    // Track the currently selected grid item
-    let selectedGridItem = null;
-
-    // Function to update the grid item's content
-    function updateGridItemContent(gridItem, content) {
-        if (!gridItem.classList.contains('special')) {
-            gridItem.textContent = content;
-        }
-    }
-
-    // Add click event listeners to each grid item
-    gridItems.forEach(function(gridItem) {
-        gridItem.addEventListener('click', function() {
-            // Remove the blue class from the previously selected grid item
-            if (selectedGridItem) {
-                selectedGridItem.classList.remove('blue');
-            }
-
-            // Set the currently selected grid item
-            selectedGridItem = gridItem;
-
-            // Add the blue class to the clicked grid item
-            selectedGridItem.classList.add('blue');
-        });
-    });
-
-    // Listen for keyboard input
-    document.addEventListener('keydown', function(event) {
-        if (selectedGridItem) {
-            if (/^[A-Öa-ö]$/.test(event.key)) {
-                updateGridItemContent(selectedGridItem, event.key.toUpperCase());
-            } else if (event.key === 'Delete' || event.key === 'Backspace') {
-                updateGridItemContent(selectedGridItem, '');
-            }
-        }
-    });
+   
 
     // Load the game state from localStorage when the page loads
     const crosswordState = [
   ['string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string', 'string'],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
-  [null, null, null, 'string', 'string', null, null, null, null, null],
+  ['string', 'string', 'string', 'string', null, 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', null, 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', 'string', 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', null, null, 'string', 'string','string','string',],
+  ['string', null, null, null, null, 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', null, 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', null, 'string', null, null,null,null,],
+  ['string', 'string', 'string', 'string', 'string', 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', null, 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', 'string', 'string', 'string', 'string','string','string',],
+  ['string', 'string', 'string', 'string', null, 'string', 'string', 'string','string','string',],
 ];
+// Select all grid items
+const gridItems = document.querySelectorAll('.grid-item');
+
+// Track the currently selected grid item
+let selectedGridItem = null;
+
+// Function to update the grid item's content
+function updateGridItemContent(gridItem, content) {
+    if (!gridItem.classList.contains('special')) {
+        gridItem.textContent = content;
+    }
+}
+
+// Add click event listeners to each grid item
+gridItems.forEach(function(gridItem) {
+    gridItem.addEventListener('click', function() {
+        // Remove the blue class from the previously selected grid item
+        if (selectedGridItem) {
+            selectedGridItem.classList.remove('blue');
+        }
+
+        // Set the currently selected grid item
+        selectedGridItem = gridItem;
+
+        // Add the blue class to the clicked grid item
+        selectedGridItem.classList.add('blue');
+    });
+});
+
+// Listen for keyboard input
+document.addEventListener('keydown', function(event) {
+    if (selectedGridItem) {
+        if (/^[A-Öa-ö]$/.test(event.key)) {
+            updateGridItemContent(selectedGridItem, event.key.toUpperCase());
+            saveCrosswordState();
+        } else if (event.key === 'Delete' || event.key === 'Backspace') {
+            updateGridItemContent(selectedGridItem, '');
+            saveCrosswordState();
+        }
+    }
+});
+
+// Load the game state from localStorage when the page loads
+function loadCrosswordState() {
+    const savedCrosswordStateJSON = localStorage.getItem('crosswordState');
+    if (savedCrosswordStateJSON) {
+        const savedCrosswordState = JSON.parse(savedCrosswordStateJSON);
+
+        // Loop through the grid items and update their content
+        for (let row = 0; row < crosswordState.length; row++) {
+            for (let col = 0; col < crosswordState[0].length; col++) {
+                const gridItem = gridItems[row * crosswordState[0].length + col];
+                const content = savedCrosswordState[row][col];
+                updateGridItemContent(gridItem, content);
+            }
+        }
+    }
+}
+
+// Function to save the current crossword state to localStorage
+function saveCrosswordState() {
+    const savedCrosswordState = [];
+
+    for (let row = 0; row < 12; row++) {
+        const rowData = [];
+        for (let col = 0; col < 10; col++) {
+            const gridItem = gridItems[row * 10 + col];
+            rowData.push(gridItem.textContent);
+        }
+        savedCrosswordState.push(rowData);
+    }
+
+    const crosswordStateJSON = JSON.stringify(savedCrosswordState);
+    localStorage.setItem('crosswordState', crosswordStateJSON);
+}
+
+// Call the loadCrosswordState function to load the crossword state on page load
+loadCrosswordState();
+
+
 </script>
 
 </body>
